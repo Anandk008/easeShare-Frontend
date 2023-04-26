@@ -15,7 +15,7 @@ const emailForm = document.querySelector("#emailForm");
 
 const toast = document.querySelector(".toast");
 
-const baseURL = "https://easeshare-api.onrender.com/";
+const baseURL = "https://easeshare-api.onrender.com";
 const uploadURL = `${baseURL}/api/files`;
 
 const maxAllowedSize = 100 * 1024 * 1024; //100mb
