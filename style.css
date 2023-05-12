@@ -106,7 +106,7 @@
   
   /* uploading progress styles */
   .progress-container {
-    border: 2px solid var(--main-bg-color);
+    border: 2px solid var(--light-blue);
     width: var(--container-width);
     height: 70px;
     border-radius: 10px;
