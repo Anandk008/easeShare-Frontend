@@ -294,7 +294,7 @@ const uploadFile = () => {
   console.log('Sent')
 };
 
-const shareGenerator = (qrVal) => {
+const shareGenerator = () => {
   let qrVal = qrInput.value;
   if(!qrVal) return;
 
@@ -318,7 +318,7 @@ const onFileUploadSuccess = (res) => {
   // console.log(url);
   sharingContainer.style.display = "block";
   fileURL.value = url;
-  shareGenerator(qrVal)
+  shareGenerator();
 
   // `https://web.whatsapp.com/send?text=${qrval}`
   // console.log(qrImg.src)
