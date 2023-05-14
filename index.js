@@ -30,7 +30,8 @@ const whatsapp = document.querySelector(".whatsapp"),
 gmail = document.querySelector(".gmail"),
 telegram = document.querySelector(".telegram");
 
-const Template = (downloadLink) =>{ return `
+function Template (downloadLink) { 
+  const template = `
       <!doctype html>
           <html>
           <head>
@@ -194,7 +195,9 @@ const Template = (downloadLink) =>{ return `
               </table>
           </body>
       </html>
-  `};
+  `;
+  return template;
+};
 
 
 browseBtn.addEventListener("click", () => {
