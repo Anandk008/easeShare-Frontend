@@ -7,6 +7,7 @@ const progressPercent = document.querySelector("#progressPercent");
 const progressContainer = document.querySelector(".progress-container");
 const progressBar = document.querySelector(".progress-bar");
 const status = document.querySelector(".status");
+const uploadContainer = document.querySelector(".upload-container");
 
 const sharingContainer = document.querySelector(".sharing-container");
 const copyURLBtn = document.querySelector("#copyURLBtn");
@@ -22,15 +23,15 @@ const maxAllowedSize = 100 * 1024 * 1024; //100mb
 
 // Qr Code Generating
 const qrInput = document.querySelector(".input-container input"),
-generateBtn = document.querySelector(".sharing-container button"),
-qrImg = document.querySelector(".qr-code img");
+  generateBtn = document.querySelector(".sharing-container button"),
+  qrImg = document.querySelector(".qr-code img");
 
 // Share Buttons
 const whatsapp = document.querySelector(".whatsapp"),
-gmail = document.querySelector(".gmail"),
-telegram = document.querySelector(".telegram");
+  gmail = document.querySelector(".gmail"),
+  telegram = document.querySelector(".telegram");
 
-function Template (downloadLink) { 
+function Template(downloadLink) {
   const template = `<!DOCTYPE html>
   <html>
     <head>
@@ -472,10 +473,9 @@ function Template (downloadLink) {
       </table>
     </body>
   </html>
-  ` ;
+  `;
   return template;
-};
-
+}
 
 browseBtn.addEventListener("click", () => {
   fileInput.click();
@@ -533,7 +533,7 @@ fileURL.addEventListener("click", () => {
 });
 
 const uploadFile = () => {
-  console.log("file added uploading", uploadURL);
+  console.log("file added uploading");
 
   files = fileInput.files;
   const file = fileInput.files[0];
@@ -546,8 +546,6 @@ const uploadFile = () => {
 
   // upload file
   const xhr = new XMLHttpRequest();
-
-
 
   // listen for upload progress
   xhr.upload.onprogress = function (event) {
@@ -575,12 +573,12 @@ const uploadFile = () => {
 
   xhr.open("POST", uploadURL);
   xhr.send(formData);
-  console.log('Sent')
+  console.log("Sent");
 };
 
 const shareGenerator = () => {
   let qrVal = qrInput.value;
-  if(!qrVal) return;
+  if (!qrVal) return;
 
   qrImg.src = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${qrVal}`;
 
@@ -589,8 +587,7 @@ const shareGenerator = () => {
 
   const tp = Template(qrVal);
   gmail.href = `mailto:?subject=EaseShare%20User%20has%20Shared%20file%20with%20you&body=${tp}`;
-}
-
+};
 
 const onFileUploadSuccess = (res) => {
   fileInput.value = ""; // reset the input
@@ -601,13 +598,13 @@ const onFileUploadSuccess = (res) => {
   const { file: url } = JSON.parse(res);
   // console.log(url);
   sharingContainer.style.display = "block";
+  uploadContainer.style.marginTop = "auto";
   fileURL.value = url;
   shareGenerator();
 
   // `https://web.whatsapp.com/send?text=${qrval}`
   // console.log(qrImg.src)
 };
-
 
 let toastTimer;
 // the toast function
@@ -619,3 +616,27 @@ const showToast = (msg) => {
     toast.classList.remove("show");
   }, 2000);
 };
+
+// Theme Change
+const toggleButton = document.getElementById("themeButton");
+function themeChange() {
+  console.log("called");
+  const theme = document.getElementById("theme");
+  const logo = document.getElementById("logo");
+  let th = "",
+    lo = "";
+  if (theme.getAttribute("href") === "style.css") {
+    theme.href = "./dark.css";
+    logo.src = "./3.svg";
+    toggleButton.innerHTML = "Light Mode 🌞";
+    toggleButton.style.background = "#000"
+  } else {
+    theme.href = "./style.css";
+    logo.src = "./2.svg";
+    toggleButton.innerHTML = "Dark Mode 🌙";
+    toggleButton.style.background = "#fff";
+  }
+
+  // theme.setAttribute('href',th);
+  // logo.setAttribute('href',lo);
+}
